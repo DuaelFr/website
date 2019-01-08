@@ -1,0 +1,14 @@
+/* TEAM */
+Webmaster: Edouard Cunibil
+Site: http://www.duael.fr
+Twitter: DuaelFr
+Location: Montpellier, France
+
+/* THANKS */
+More to come
+  
+/* SITE */                            
+Last update: 2011/06/08                      
+Standards: HTML5, CSS3
+Components: Nothing yet
+Software: Nothing yet

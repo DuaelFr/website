@@ -1,0 +1,15 @@
+Options +FollowSymlinks
+RewriteEngine On
+RewriteBase /voeux/2012
+
+RewriteCond %{HTTP_HOST} !^duael.fr$
+RewriteRule ^(.*)$ http://duael.fr/$1 [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ - [NC,L]
+
+RewriteRule ^.*$ / [R=301,L]
+
+DirectoryIndex index.html
