@@ -1,12 +1,12 @@
-<!doctype html>  
+<!doctype html>
 <html lang="fr">
 <head>
   <meta charset="utf-8">
   <meta name="Generator" content="Drupal 1337 (http://drupal.org)" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>Expert développeur Drupal à Montpellier | Edouard Cunibil | Duael @Happyculture</title>
-  <meta name="author" content="Edouard Cunibil EIRL | Duael">
+  <title>Expert développeur Drupal à Montpellier | Edouard Cunibil | Duael</title>
+  <meta name="author" content="Edouard Cunibil | Duael">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="css/style.css" rel="stylesheet" />
@@ -33,31 +33,33 @@
 
 <body>
 
+  <div class="logo">
+    <img src="/images/logo_duael.svg" alt="Duael, expert Drupal" />
+  </div>
+
   <hgroup class="container">
     <h1>Expert développeur Drupal à Montpellier</h1>
     <h2>Duael aka. Edouard Cunibil</h2>
   </hgroup>
 
-  <div class="fusion">
-    <div class="icon">
-      <img src="/images/logo_duael.svg" alt="Duael, expert Drupal" />
-    </div>
-    <p>a trouvé le bonheur en rejoignant</p>
-    <div class="icon">
-      <a href="http://happyculture.coop">
-        <img src="/images/logo_happyculture.svg" alt="Happyculture, experts Drupal et méthodes agiles" />
-      </a>
-    </div>
+  <div class="container">
+    <h3>En quelques mots</h3>
+    <ul>
+      <li>Développeur web (PHP) depuis 2003,</li>
+      <li>Spécialiste de Drupal depuis 2010,</li>
+      <li>Compétences en développement back et front,</li>
+      <li>Contributeur au cœur de Drupal et mainteneur de nombreux modules contribués,</li>
+      <li>Fervent défenseur de l'<abbr title="Économie Sociale et Solidaire">ESS</abbr>, des sociétés Coopératives et de l'Open Source.</li>
+    </ul>
   </div>
 
   <div class="container">
     <h3>Me contacter</h3>
     <ul id="contacts">
-      <li><a href="http://www.google.com/recaptcha/mailhide/d?k=01jluRnOmg80rwntgYN_AUyA==&c=yNaXoFjOXC4ymkT1_Nc1nQ==">Contactez moi par e-mail,</a> (protégé par un Captcha)</li>
-      <li><a href="http://drupal.org/user/931394">consultez mon profil sur Drupal.org,</a></li>
-      <li><a href="http://www.viadeo.com/profile/002910lxrxjqynt">consultez mon "CV" sur Viadeo,</a></li>
-      <li><a href="http://twitter.com/#!/DuaelFr">suivez moi sur Twitter,</a></li>
-      <li><a href="http://www.linkedin.com/profile/view?id=31693127">rejoignez mon réseau LinkedIn,</a></li>
+      <li><a href="http://drupal.org/user/931394">Consultez mon profil sur Drupal.org,</a></li>
+      <li><a href="https://www.linkedin.com/in/edouardcunibil/">rejoignez mon réseau LinkedIn,</a></li>
+      <li><a href="http://x.com/DuaelFr">suivez moi sur X (Twitter),</a></li>
+      <li><a href="https://mailhide.io/e/4LxeIfMe">contactez moi par e-mail,</a> (protégé par un Captcha)</li>
     </ul>
   </div>
 
@@ -71,7 +73,7 @@
     var c  = document.getElementById('contacts');
 
     var t  = document.createElement('li');
-    t.innerHTML = 'ou appelez moi au ' + pn + '.';
+    t.innerHTML = 'ou appelez moi au <a href="tel:' + pn.replaceAll(' ', '') + '">' + pn + '</a>.';
 
     c.appendChild(t);
   }
@@ -87,6 +89,6 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
   </script>
-  
+
 </body>
 </html>
