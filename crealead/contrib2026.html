@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="Generator" content="Drupal 1337 (http://drupal.org)" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>Simulateur de contribution CESA Crealead 2025 VS 2026 | Duael</title>
+  <meta name="author" content="Edouard Cunibil | Duael">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/css/style.css" rel="stylesheet" />
+
+  <link rel="apple-touch-icon" sizes="57x57" href="/images/icons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/images/icons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/icons/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/icons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/icons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/images/icons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/icons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/images/icons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/icons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/images/icons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/images/icons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icons/favicon-16x16.png">
+  <link rel="shortcut icon" href="/images/icons/favicon.ico">
+  <link rel="manifest" href="/images/icons/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+
+<body>
+
+<div class="logo">
+  <img src="/images/logo_duael.svg" alt="Duael, expert Drupal" />
+</div>
+
+<hgroup class="container">
+  <h1>Simulateur de contribution CESA Crealead</h1>
+  <h2>2025 VS 2026</h2>
+  <p class="cta"><a href="https://coelan.org/GTContrib/?Rendus#ag-du-26-juin">Connaître le contexte</a></p>
+</hgroup>
+
+<div class="container" x-data="data">
+  <h3>Calculer</h3>
+  <form action="#">
+    <fieldset class="stack">
+      <legend>Informations financières</legend>
+      <p>
+        <small>
+          Aucune donnée ne sera envoyée sur le réseau. Les calculs seront faits localement par votre machine.<br>
+          <a href="#aide" @click="document.querySelector($event.target.getAttribute('href')).setAttribute('open', true)">J'ai besoin d'aide pour remplir le formulaire</a>
+        </small>
+      </p>
+      <div>
+        <label>
+          Chiffre d'affaires <strong>externe</strong> 2025&nbsp;: <input type="number" name="ca" value="0" x-model="ca" required />&nbsp;€&nbsp;HT<br>
+          <small>La contribution sur le CA interne ne change pas (5%), ne l'incluez pas pour ne pas fausser le calcul</small>
+        </label>
+      </div>
+      <div>
+        <label>
+          Marge brute 2025&nbsp;: <input type="number" name="mb" x-model="mb" />&nbsp;€&nbsp;HT<br>
+          <small>Laisser vide si vous n'êtes pas concerné</small>
+        </label>
+      </div>
+      <div>
+        <label>
+          Tranche de contribution 2025&nbsp;:
+          <select name="tranche" x-model="tranche" required>
+            <option value="11.0">11,0 %</option>
+            <option value="10.5">10,5 %</option>
+            <option value="10.0">10,0 %</option>
+            <option value="9.5">9,5 %</option>
+            <option value="9.0">9,0 %</option>
+            <option value="8.7">8,7 %</option>
+            <option value="8.4">8,4 %</option>
+            <option value="8.1">8,1 %</option>
+            <option value="7.8">7,8 %</option>
+            <option value="7.5">7,5 %</option>
+          </select>
+        </label>
+      </div>
+      <div>
+        <label>
+          Titulaire du RSA, de l'ASS, d'une RQTH, du statut d'aidant&nbsp;: <input type="checkbox" name="social" x-model="social" />
+        </label>
+      </div>
+      <div>
+        <label>
+          Filière&nbsp;:
+          <select name="filiere" x-model="filiere" required>
+            <option value="generaliste">Généraliste</option>
+            <option value="batiment">Bâtiment</option>
+          </select>
+        </label>
+      </div>
+    </fieldset>
+    <fieldset class="stack">
+      <legend>Résultats</legend>
+      <p><small>
+        Les résultats ci-dessous sont approximatifs et se basent sur les taux théoriques de contribution.<br>
+        De plus, l'application du nouveau barème ne sera <strong>pas</strong> rétroactive au 01/01/2026.
+      </small></p>
+      <div class="results-old">
+        <h4>Avant le changement</h4>
+        <p>vous deviez payer <br><strong x-text="nFormat.format(oldFinalContrib)">0 €</strong> de contribution annuelle sur votre CA externe, soit <br><strong x-text="nFormat.format(oldFinalContrib / 12)">0 €</strong> de contribution mensuelle</p>
+      </div>
+      <div class="results-new">
+        <h4>Après le changement</h4>
+        <p>vous devriez payer <br><strong x-text="nFormat.format(newFinalContrib)">0 €</strong> de contribution annuelle sur votre CA externe, soit <br><strong x-text="nFormat.format(newFinalContrib / 12)">0 €</strong> de contribution mensuelle</p>
+      </div>
+      <div class="results-diff">
+        <h4>Soit une différence de</h4>
+        <p><strong x-text="nDiffFormat.format(diffContrib)">0 €</strong> de contribution annuelle, soit <br><strong x-text="nDiffFormat.format(diffContrib / 12)">0 €</strong> de contribution mensuelle</p>
+      </div>
+    </fieldset>
+    <details class="stack">
+      <summary>Consulter le détail du calcul</summary>
+      <div class="details-old">
+        <h4>Avant le changement</h4>
+        <p>Contribution : CA * Taux = <span x-text="nFormat.format(ca)">0</span> * <span x-text="pFormat.format(tranche / 100)">11.0</span> = <strong x-text="nFormat.format(oldContrib)">0 €</strong></p>
+        <p>Plancher : <strong x-text="nFormat.format(oldPlancher)">0 €</strong> <small>(<span x-text="oldPlancherExplain"></span>)</small></p>
+        <p>Plafond : <strong x-text="nFormat.format(oldPlafond)">0 €</strong> <small>(<span x-text="oldPlafondExplain"></span>)</small></p>
+        <p>Contribution finale : <strong x-text="nFormat.format(oldFinalContrib)">0 €</strong> <small>(<span x-text="oldFinalContribExplain"></span>)</small></p>
+      </div>
+      <div class="details-new">
+        <h4>Après le changement</h4>
+        <p>Contribution : <ul x-html="newContribExplain"></ul></p>
+        <p>Plancher : <strong x-text="nFormat.format(newPlancher)">0 €</strong> <small>(<span x-text="newPlancherExplain"></span>)</small></p>
+        <p>Plafond : <strong x-text="nFormat.format(newPlafond)">0 €</strong> <small>(<span x-text="newPlafondExplain"></span>)</small></p>
+        <p>Contribution finale : <strong x-text="nFormat.format(newFinalContrib)">0 €</strong> <small>(<span x-text="newFinalContribExplain"></span>)</small></p>
+      </div>
+    </details>
+  </form>
+</div>
+
+<div class="container">
+  <details id="aide" class="stack">
+    <summary><h3>Obtenir de l'aide</h3></summary>
+    <div>
+      <h4>Récupérer son CA externe</h4>
+      <p>Se rendre sur <a href="https://appli.louty.net" target="_blank">Louty</a> et s'identifier si nécessaire</p>
+      <ol>
+        <li>Se rendre dans <em>Rapports gestion > Visualiser</em> (colonne de gauche)</li>
+        <li>Dans "Rapport à visualiser" choisir "RES_U_Résultat d'Activité"</li>
+        <li>Dans "Exercice(s)" choisir "2025"</li>
+        <li>Cliquer sur "Exécuter"</li>
+        <li>Sur la ligne "Marge brute" cliquer sur le symbole "+" pour voir le détail</li>
+        <li>Copier le nombre correspondant à la ligne "Chiffre d'affaires"</li>
+      </ol>
+      <a href="contrib2026aide.png" target="_blank" title="Voir l'image d'aide en plein écran"><img src="contrib2026aide.png" alt /></a>
+    </div>
+    <div>
+      <h4>Récupérer sa marge brute</h4>
+      <p>À venir… En attendant, rapprochez vous de votre référent⋅e ou du pôle Gestion.</p>
+    </div>
+    <div>
+      <h4>Problème technique</h4>
+      <p><a href="mailto:crealead@duael.fr">Envoyez moi un mail</a></p>
+    </div>
+  </details>
+</div>
+
+<script type="text/javascript">
+  const newTranches = [
+    { ca: 20000, rate: 12.0 },
+    { ca: 20000, rate: 11.5 },
+    { ca: 20000, rate: 11.0 },
+    { ca: 20000, rate: 10.0 },
+    { ca: 20000, rate: 9.0 },
+    { ca: 50000, rate: 8.0 },
+    { ca: 50000, rate: 6.0 },
+  ];
+
+  const calculateNewContrib = (ca, mb, social) => {
+    let contrib = 0;
+    let remainingCA = ca;
+
+    for (const tranche of newTranches) {
+      const affectedCA = Math.min(remainingCA, tranche.ca);
+      contrib += affectedCA * tranche.rate / 100;
+      remainingCA -= affectedCA;
+      if (remainingCA === 0) {
+        break;
+      }
+    }
+    const plancher = 170 * 12 / (social ? 2 : 1);
+    const plafond = Math.max(plancher, Math.min(mb > 0 ? mb * 16 / 100 : ca, 15000));
+    return constrainContrib(contrib, plancher, plafond);
+  };
+
+  const constrainContrib = (contrib, plancher, plafond) => {
+    return Math.min(plafond, Math.max(plancher, contrib));
+  };
+
+  const pFormat = new Intl.NumberFormat("fr-FR", { style: "percent" });
+  const nFormat = new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" });
+  const nDiffFormat = new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR", signDisplay: "always" });
+
+  document.addEventListener('alpine:init', () => {
+    Alpine.data('data', () => ({
+      ca: 0,
+      mb: 0,
+      tranche: 11.0,
+      social: false,
+      filiere: 'generaliste',
+
+      get oldPlancher() {
+        return (this.filiere === 'generaliste' ? 70 : 80) * 12 / (this.social ? 2 : 1);
+      },
+      get oldPlancherExplain() {
+        let msg = `Filière ${this.filiere} = `;
+        msg += nFormat.format(this.filiere === 'generaliste' ? 70 : 80) + ' par mois';
+        if (this.social) {
+          msg += ', divisé par 2 pour titulaires RSA, ASS, RQTH ou aidants.';
+        }
+        return msg;
+      },
+      get oldPlafond() {
+        return Math.max(this.oldPlancher, (this.mb > 0 ? this.mb : this.ca > 0 ? this.ca : Infinity) * 16 / 100);
+      },
+      get oldPlafondExplain() {
+        let msg = '';
+        if (this.mb > 0) {
+          msg += '16% de la marge brute';
+        }
+        else if (this.ca > 0) {
+          msg += '16% du CA (à défaut de marge brute)';
+        }
+        else {
+          msg += 'dépend de la marge brute, ou du CA à défaut';
+        }
+        if (this.oldPlafond === this.oldPlancher) {
+          msg += ', ne peut pas être inférieur au plancher';
+        }
+        return msg;
+      },
+      get oldContrib() {
+        return this.ca * this.tranche / 100;
+      },
+      get oldFinalContrib() {
+        return constrainContrib(this.oldContrib, this.oldPlancher, this.oldPlafond);
+      },
+      get oldFinalContribExplain() {
+        return this.oldFinalContrib === this.oldPlancher ? 'plancher de contribution' :
+          this.oldFinalContrib === this.oldPlafond ? 'plafond de contribution' :
+          'contribution normale';
+      },
+
+      get newPlancher() {
+        return 170 * 12 / (this.social ? 2 : 1);
+      },
+      get newPlancherExplain() {
+        let msg = '';
+        msg += nFormat.format(170) + ' par mois';
+        if (this.social) {
+          msg += ', divisé par 2 pour titulaires RSA, ASS, RQTH ou aidants.';
+        }
+        return msg;
+      },
+      get newPlafond() {
+        return Math.max(this.newPlancher, Math.min(15000, (this.mb > 0 ? this.mb : this.ca > 0 ? this.ca : Infinity) * 16 / 100));
+      },
+      get newPlafondExplain() {
+        let msg = '';
+        if (this.mb > 0) {
+          msg += '16% de la marge brute';
+        }
+        else if (this.ca > 0) {
+          msg += '16% du CA (à défaut de marge brute)';
+        }
+        else {
+          msg += 'dépend de la marge brute, ou du CA à défaut';
+        }
+        if (this.newPlafond === this.newPlancher) {
+          msg += ', ne peut pas être inférieur au plancher';
+        }
+        else if (this.newPlafond === 15000) {
+          msg += ', ne peut pas être supérieur à ' + nFormat.format(15000);
+        }
+        return msg;
+      },
+      get newContrib() {
+        let contrib = 0;
+        let remainingCA = this.ca;
+
+        for (const tranche of newTranches) {
+          const affectedCA = Math.min(remainingCA, tranche.ca);
+          contrib += affectedCA * tranche.rate / 100;
+          remainingCA -= affectedCA;
+          if (remainingCA === 0) {
+            break;
+          }
+        }
+        return contrib;
+      },
+      get newContribExplain() {
+        let msg = '';
+        let start = 0;
+        let contrib = 0;
+        let remainingCA = this.ca;
+        const contribTranches = [];
+
+        for (const tranche of newTranches) {
+          const affectedCA = Math.min(remainingCA, tranche.ca);
+          const contribTranche = affectedCA * tranche.rate / 100;
+          contribTranches.push(contribTranche);
+
+          msg += '<li>de ' + nFormat.format(start) + ' à ' + nFormat.format(start + affectedCA) + ' : ' + nFormat.format(affectedCA) + ' * ' + pFormat.format(tranche.rate / 100) + ' = ' + nFormat.format(contribTranche) + '</li>';
+
+          contrib += contribTranche;
+          remainingCA -= affectedCA;
+          start += affectedCA;
+          if (remainingCA === 0) {
+            break;
+          }
+        }
+
+        msg += '<li>Total : ' + contribTranches.map(nFormat.format).join(' + ') + ' = <strong>' + nFormat.format(contrib) + '</strong></li>';
+
+        return msg;
+      },
+      get newFinalContrib() {
+        return constrainContrib(this.newContrib, this.newPlancher, this.newPlafond);
+      },
+      get newFinalContribExplain() {
+        return this.newFinalContrib === this.newPlancher ? 'plancher de contribution' :
+          this.newFinalContrib === this.newPlafond ? 'plafond de contribution' :
+            'contribution normale';
+      },
+
+      get diffContrib() {
+        return this.newFinalContrib - this.oldFinalContrib
+      },
+    }))
+  })
+</script>
+
+</body>
+</html>

@@ -16,9 +16,33 @@ h1, h2, h3 {
   margin: 0;
   padding: 0;
 }
+h4 {
+  margin-block: .5em .25em;
+
+  &:first-child {
+    margin-block-start: 0;
+  }
+
+  & + p {
+    margin-block-start: 0;
+  }
+}
 a { color: #660000; }
 a:hover, a:focus-visible { color: #000000; }
 strong, em { color: #000000; }
+p {
+  margin-block: .5em;
+
+  &:first-child {
+    margin-block-start: 0;
+  }
+  &:last-child {
+    margin-block-end: 0;
+  }
+}
+img {
+  max-width: 100%;
+}
 
 .message {
   background: #ffaaaa;
@@ -30,8 +54,46 @@ strong, em { color: #000000; }
   margin: auto;
   width: clamp(15rem, 40dvw, 40ch);
 }
-.logo img {
-  max-width: 100%;
+
+.stack,
+details.stack::details-content {
+  display: flex;
+  flex-flow: column nowrap;
+  row-gap: 1rem;
+}
+
+.cta {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  column-gap: .5em;
+
+  &::before {
+    content: "-> ";
+  }
+  &::after {
+    content: " <-";
+  }
+}
+
+details > summary {
+  cursor: pointer;
+
+  & > * {
+    display: inline;
+  }
+}
+
+form {
+  display: flex;
+  flex-flow: column nowrap;
+  row-gap: 2rem;
+  padding-block: 1rem;
+
+  & fieldset {
+    padding-inline: .5rem;
+  }
 }
 
 @media (width >= 48rem) {
